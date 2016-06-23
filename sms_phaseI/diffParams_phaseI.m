@@ -1,5 +1,5 @@
 %
-% Case 2: 180 degree refocusing pulse for twice-refocused/dPFG diffusion
+% Case: 180 degree refocusing pulse for twice-refocused/dPFG diffusion
 %
 
 clear evalp
@@ -20,7 +20,7 @@ slthick = 1.25; % mm, slice thickness
 dz = (slthick/40)/10; % deltaz of profile (cm)
 tb = 4; % time-bandwidth product of slice profiles
 evalp.maxPhsDev = Inf; % radians, max amount of in-band phase deviation
-[evalp.b2d,evalp.roi,evalp.z] = gen_mb_eval_prof(de,nb,fov,slthick,dz,tb);
+[evalp.b2d,evalp.roi,evalp.z] = gen_sms_eval_prof(de,nb,fov,slthick,dz,tb);
 
 % multibandeval switches
 evalp.fname = 'diff_eval';

@@ -1,4 +1,4 @@
-function [b2d,roi,z] = gen_mb_eval_prof(de,nb,fov,dthick,dz,tb)
+function [b2d,roi,z] = gen_sms_eval_prof(de,nb,fov,dthick,dz,tb)
 
 % function [b2d,roi,z] = gen_mb_eval_prof(de,nb,fov,dthick,dz,tb)
 % 

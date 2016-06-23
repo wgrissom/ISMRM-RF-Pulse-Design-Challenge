@@ -1,4 +1,4 @@
-function [isValid,dur,errCode] = multibandEval(rf,g,dt,evalp)
+function [isValid,dur,errCode] = smsEval(rf,g,dt,evalp)
 
 % function [isValid,dur,errCode] = multibandeval(rf,g,dt,evalp)
 %

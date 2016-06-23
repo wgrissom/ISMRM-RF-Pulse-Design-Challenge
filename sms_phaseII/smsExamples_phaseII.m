@@ -1,4 +1,4 @@
-% This script will design and evaluate multiband pulses for PHASE II of the
+% This script will design and evaluate sms pulses for PHASE II of the
 % ISMRM RF Pulse Design Challenge on multiband pulse design.
 % It is intended to provide examples of pulses that meet the specifications
 % for both cases. For more information on the challenge and the specific
@@ -15,10 +15,10 @@
 % structs, where the first dimension of each array is the number of bands
 % index, and the second dimension is the slice thickness index. 
 
-% Note that this code will require John Pauly's rf_tools SLR toolbox to run. 
+% Note that this code REQUIRES John Pauly's rf_tools SLR toolbox to run. 
 % This can be downloaded at: http://rsl.stanford.edu/research/software.html
 
-addpath ../
+addpath ../sms_utils
 
 maxScore = 999999; % max score that will be posted if pulses are not valid
 
@@ -27,7 +27,7 @@ maxScore = 999999; % max score that will be posted if pulses are not valid
 %
 
 % Get evaluation parameters
-tseParams; % defines evalp, for each number of bands and slice thickness
+tseParams_phaseII; % defines evalp, for each number of bands and slice thickness
 
 % design a pulse for each number of bands and slice thickness
 tse = cell(length(nb),length(slthick));
@@ -53,7 +53,7 @@ tseErrorCode = zeros(length(nb),length(slthick));
 for ii = 1:length(nb) % nb and slthick are defined by tseParams
     for jj = 1:length(slthick)
 
-        [tseIsValid(ii,jj),tseDur(ii,jj),tseErrorCode(ii,jj)] = multibandEval(tse{ii,jj}.rf,tse{ii,jj}.g,tse{ii,jj}.dt,evalp{ii,jj});
+        [tseIsValid(ii,jj),tseDur(ii,jj),tseErrorCode(ii,jj)] = smsEval(tse{ii,jj}.rf,tse{ii,jj}.g,tse{ii,jj}.dt,evalp{ii,jj});
         if tseIsValid(ii,jj) == true
             fprintf('%d-Band, %0.2f mm-thick TSE PINS pulse passed with duration %d us\n',...
                 nb(ii),slthick(jj),tseDur(ii,jj));
@@ -70,7 +70,7 @@ end
 %
 
 % Get evaluation parameters
-diffParams; % defines evalp, for each number of bands and slice thickness
+diffParams_phaseII; % defines evalp, for each number of bands and slice thickness
 
 % design and evaluate a conventional multiband pulse
 n = 1024; % number of time points in pulse
@@ -133,7 +133,7 @@ for ii = 1:length(nb) % nb and slthick are defined by diffParams
     for jj = 1:length(slthick)
        
         [diffIsValid(ii,jj),diffDur(ii,jj),diffErrorCode(ii,jj)] = ...
-            multibandEval(diff{ii,jj}.rf,diff{ii,jj}.g,diff{ii,jj}.dt,evalp{ii,jj});
+            smsEval(diff{ii,jj}.rf,diff{ii,jj}.g,diff{ii,jj}.dt,evalp{ii,jj});
         if diffIsValid(ii,jj) == true
             fprintf('%d-Band, %0.2f mm-thick diffusion MB pulse passed with duration %d us\n',...
                 nb(ii),slthick(jj),diffDur(ii,jj));
@@ -155,7 +155,4 @@ if ~any([tseIsValid(:);diffIsValid(:)] == false)
 else
     fprintf('One or more pulses failed; score is %d\n',maxScore);
 end
-
-% generate a valid submission candidate file from the pulse structures
-save ../MBCandidate_PhaseII.mat tse diff
 

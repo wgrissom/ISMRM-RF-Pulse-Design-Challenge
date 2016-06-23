@@ -1,19 +1,26 @@
 % This script will design and evaluate multiband pulses for the
-% ISMRM RF Pulse Design Challenge on multiband pulse design.
-% It is intended to provide examples of pulses that meet the specifications
-% for both cases. For more information on the challenge and the specific
-% problems, check the website at challenge.ismrm.org
+% ISMRM RF Pulse Design Challenge on multiband pulse design for sms
+% acquisitions.
+% 
+% This script provides examples of pulses that meet the specifications
+% for both diffusion and TSE cases. It is best if you have John Pauly's
+% rf_tools installed and in your path. They can be downloaded from:
+% http://rsl.stanford.edu/research/software.html
+%
+% For more information on the challenge and the specific
+% problems, visit the website at challenge.ismrm.org
+%
 % 2015, Will Grissom and Kawin Setsompop
 % Developed in MATLAB R2015a
 
-addpath ../
+addpath ../sms_utils
 
 %
 % Case 1: 180 degree refocusing pulse for TSE
 %
 
 % Get evaluation parameters
-tseParams;
+tseParams_phaseI;
 
 % design and evaluate a PINS pulse
 tse.dt = 2e-6; % dwell time
@@ -31,11 +38,11 @@ else
 end
 
 % evaluate it
-[tseIsValid,tseDur,tseErrorCode] = multibandEval(tse.rf,tse.g,tse.dt,evalp);
+[tseIsValid,tseDur,tseErrorCode] = smsEval(tse.rf,tse.g,tse.dt,evalp);
 if tseIsValid == true
-    fprintf('TSE PINS pulse passed with duration %d us\n',tseDur);
+    fprintf('TSE pulse passed with duration %d us\n',tseDur);
 else
-    fprintf('TSE PINS pulse failed with error code %d\n',tseErrorCode);
+    fprintf('TSE pulse failed with error code %d\n',tseErrorCode);
 end    
 
 %
@@ -43,7 +50,7 @@ end
 %
 
 % Get evaluation parameters
-diffParams;
+diffParams_phaseI;
 
 % design and evaluate a conventional multiband pulse
 n = 1024; % number of time points in pulse
@@ -82,11 +89,11 @@ diff.g = [gmb(1)*(0:nramppts-1)'/nramppts;gmb;...
 diff.rf = [zeros(nramppts,1);rfmbut;zeros(nramppts,1)];
 
 % evaluate it
-[diffIsValid,diffDur,diffErrorCode] = multibandEval(diff.rf,diff.g,diff.dt,evalp);
+[diffIsValid,diffDur,diffErrorCode] = smsEval(diff.rf,diff.g,diff.dt,evalp);
 if diffIsValid == true
-    fprintf('Diffusion MB pulse passed with duration %d us\n',diffDur);
+    fprintf('Diffusion pulse passed with duration %d us\n',diffDur);
 else
-    fprintf('Diffusion MB pulse failed with error code %d\n',diffErrorCode);
+    fprintf('Diffusion pulse failed with error code %d\n',diffErrorCode);
 end   
 
 % total score is sum of two pulse durations (us)

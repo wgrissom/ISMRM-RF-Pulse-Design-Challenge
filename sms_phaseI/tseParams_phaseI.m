@@ -1,5 +1,5 @@
 %
-% Case 1: 180 degree refocusing pulse for TSE
+% Case: 180 degree refocusing pulse for TSE
 %
 
 clear evalp
@@ -20,7 +20,7 @@ slthick = 1; % mm, slice thickness
 dz = (slthick/40)/10; % deltaz of profile (cm)
 tb = 3; % time-bandwidth product of slice profiles
 evalp.maxPhsDev = 0.01; % radians, max amount of in-band phase deviation
-[evalp.b2d,evalp.roi,evalp.z] = gen_mb_eval_prof(de,nb,fov,slthick,dz,tb);
+[evalp.b2d,evalp.roi,evalp.z] = gen_sms_eval_prof(de,nb,fov,slthick,dz,tb);
 
 % multibandeval function switches
 evalp.fname = 'tse_eval';
