@@ -35,7 +35,7 @@ function [isValid,dur,errCode] = smsEval(rf,g,dt,evalp)
 %                                   amplitude constraints
 %                           14 =    refocusing profile does not meet
 %                                   phase constraints
-%
+%                           15 =    SAR is too high (ONLY IN PHASE II)
 %
 
 dur = Inf; % returned duration if the pulse is not valid
@@ -109,7 +109,18 @@ try
         errMsg = 'Error code 9: peak RF is too high';
         error(errMsg);
     end
-
+    
+    % check that SAR meets constraint
+    if isfield(evalp,'coilSARefficiency') && isfield(evalp,'pulseFreq')
+        SAR = evalp.coilSARefficiency*dt*sum(abs(rf).^2)*evalp.pulseFreq; 
+        if SAR > evalp.maxSAR
+            isValid = false;
+            errCode = 15;
+            errMsg = 'Error code 15: SAR is too high';
+            error(errMsg);
+        end
+    end
+    
     % check gradient amplitude
     if max(abs(g)) > evalp.maxg
         isValid = false;

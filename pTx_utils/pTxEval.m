@@ -1,4 +1,4 @@
-function [isValid,dur,errCode] = pTxEval_phaseII(rf,g,dt,maps,evalp)
+function [isValid,dur,errCode] = pTxEval(rf,g,dt,maps,evalp)
 
 % function [isValid,dur,errCode] = pTxEval(rf,g,dt,evalp)
 %
