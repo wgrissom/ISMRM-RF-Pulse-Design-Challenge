@@ -22,8 +22,8 @@ pTx_phaseII/ - Phase II of the pTx sub-challenge
     |   +-- pTxParams_torso_multislice_phaseII.m - Multislice torso problem parameters
     +-- pTxExamples_phaseII.m - Example script to design 5-spoke pulses for each problem and evaluate them
 pTx_utils/ - Utility scripts for the pTx sub-challenge (both phases)
-    +-- domintrap.m - Design a mininum duration trapezoid with 
-    +-- doTrap.m - Design a minimum duration trapezoid
+    +-- domintrap.m - Design a minimum duration trapezoid with target area all in plateau
+    +-- doTrap.m - Design a minimum duration trapezoid for rewinders and phase encode blips
     +-- dzSpokes_sms.m - Design a spokes pulse for one or more slices
     +-- pTxEval.m - Evaluate and score a pTx pulse submission
     +-- subrf.mat - SLR slice-selective pulse shape, to make John Pauly's toolbox optional
@@ -35,13 +35,13 @@ sms_phaseI/ - Phase I of the SMS sub-challenge
     +-- smsExamples_phaseI.m - Design an example PINS pulse for TSE, and a conventional multiband pulse for diffusion, and evaluate them
     +-- tseParams_phaseI.m - TSE problem parameters
 sms_phaseII/ - Phase II of the SMS sub-challenge
-    +-- diffParams_phaseII.m - 
-    +-- smsExamples_phaseII.m - 
-    +-- tseParams_phaseII.m
+    +-- diffParams_phaseII.m - Diffusion problem parameters
+    +-- smsExamples_phaseII.m - Design example PINS pulses for TSE, and conventional multiband pulses for diffusion, and evaluate them
+    +-- tseParams_phaseII.m - TSE problem parameters
 sms_utils/ - Utility scripts for the SMS sub-challenge (both phases)
-    +-- blochsim.m - 
-    +-- dotrap.m - 
-    +-- dz_pins.m - 
-    +-- gen_sms_eval_prof.m - 
+    +-- blochsim.m - Bloch equation RF pulse simulator
+    +-- dotrap.m - Design a minimum duration trapezoid for rewinders and phase encode blips
+    +-- dz_pins.m - Design a PINS pulse
+    +-- gen_sms_eval_prof.m - Generate the sampled target slice profiles
     +-- smsEval.m - Evaluate and score an SMS pulse submission
 ```
