@@ -1,5 +1,5 @@
 # ISMRM-RF-Pulse-Design-Challenge
-Scoring codes and examples for the 2016 ISMRM Challenge on RF Pulse Design. The challenge website is http://challenge.ismrm.org.
+Scoring codes and examples for the 2016 ISMRM Challenge on RF Pulse Design. The challenge website is http://challenge.ismrm.org. See the release page for the latest release of the code, and to download the pTx B1+ maps and VOPs: https://github.com/wgrissom/ISMRM-RF-Pulse-Design-Challenge/releases/latest. 
 
 The files are:
 ```
